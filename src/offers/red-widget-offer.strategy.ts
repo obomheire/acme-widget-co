@@ -16,7 +16,7 @@ export class RedWidgetOfferStrategy implements SpecialOffer {
   calculateDiscount(basket: Basket): number {
     // Find red widgets in the basket
     const redWidgets = basket.items.find(
-      (item) => item.product.code === ProductCode.RED_WIDGET,
+      (item) => item.product.code === ProductCode.RED_WIDGET.valueOf(),
     );
 
     if (!redWidgets || redWidgets.quantity < 2) {
