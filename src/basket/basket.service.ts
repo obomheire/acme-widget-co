@@ -45,7 +45,7 @@ export class BasketService {
    */
   total(): number {
     // Calculate raw subtotal
-    const rawSubtotal = this.basket.items.reduce(
+    const subtotal = this.basket.items.reduce(
       (total, item) => total + item.product.price * item.quantity,
       0,
     );
@@ -53,17 +53,15 @@ export class BasketService {
     // Calculate special offer discounts
     const discount = this.specialOffer.calculateDiscount(this.basket);
 
-    // Calculate subtotal after discounts (rounded to 2 decimal places)
-    const subtotalAfterDiscount =
-      Math.round((rawSubtotal - discount) * 100) / 100;
+    // Calculate subtotal after discounts
+    const discountedSubtotal = Math.round((subtotal - discount) * 100) / 100;
 
-    // Calculate delivery charge based on subtotal after discounts
-    const deliveryCharge = this.deliveryRule.calculateDeliveryCharge(
-      subtotalAfterDiscount,
-    );
+    // Calculate delivery charge based on discounted subtotal
+    const deliveryCharge =
+      this.deliveryRule.calculateDeliveryCharge(discountedSubtotal);
 
     // Calculate final total (rounded to 2 decimal places)
-    return Math.round((subtotalAfterDiscount + deliveryCharge) * 100) / 100;
+    return Math.round((discountedSubtotal + deliveryCharge) * 100) / 100;
   }
 
   /**
