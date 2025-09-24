@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { CatalogueService } from '../catalogue/catalogue.service';
 import type { DeliveryRule } from '../shared/types/delivery-rule.interface';
 import type { SpecialOffer } from '../shared/types/special-offer.interface';
-import { Basket, BasketItem } from '../shared/types/basket.interface';
+import { Basket } from '../shared/types/basket.interface';
 
 /**
  * Service for managing shopping basket operations
