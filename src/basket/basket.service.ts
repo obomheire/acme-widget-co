@@ -53,13 +53,17 @@ export class BasketService {
     // Apply special offers
     const discount = this.specialOffer.calculateDiscount(this.basket);
 
-    // Calculate delivery charge based on discounted subtotal
-    const deliveryCharge = this.deliveryRule.calculateDeliveryCharge(
-      subtotal - discount,
-    );
+    // Calculate discounted subtotal
+    const discountedSubtotal = Math.round((subtotal - discount) * 100) / 100;
 
+    // Calculate delivery charge based on discounted subtotal
+    const deliveryCharge = this.deliveryRule.calculateDeliveryCharge(discountedSubtotal);
+
+    // Calculate final total with proper rounding at each step
+    const finalTotal = discountedSubtotal + deliveryCharge;
+    
     // Return final total rounded to 2 decimal places
-    return Number((subtotal - discount + deliveryCharge).toFixed(2));
+    return Math.round(finalTotal * 100) / 100;
   }
 
   /**

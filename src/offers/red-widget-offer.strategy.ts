@@ -25,9 +25,12 @@ export class RedWidgetOfferStrategy implements SpecialOffer {
 
     // Calculate number of pairs eligible for discount
     const discountPairs = Math.floor(redWidgets.quantity / 2);
-
+    
     // Calculate discount amount (half price for second item in each pair)
     const discountPerPair = redWidgets.product.price / 2;
-    return discountPairs * discountPerPair;
+    const totalDiscount = discountPairs * discountPerPair;
+    
+    // Return rounded discount
+    return Math.round(totalDiscount * 100) / 100;
   }
 }
