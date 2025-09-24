@@ -1,5 +1,3 @@
-import { Basket } from './basket.interface';
-
 /**
  * Strategy interface for calculating delivery charges based on basket total
  */
